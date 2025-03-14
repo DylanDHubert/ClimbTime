@@ -10,11 +10,11 @@ export const metadata: Metadata = {
   description: "View user profile",
 };
 
-export default async function UserProfilePage({ params }: { params: { userId: string } }) {
+export default async function UserProfilePage({ params }: { params: Promise<{ userId: string }> }) {
   const session = await getServerSession(authOptions);
   
   // Ensure params is awaited before using its properties
-  const userId = params.userId;
+  const { userId } = await params;
   
   if (!userId) {
     notFound();

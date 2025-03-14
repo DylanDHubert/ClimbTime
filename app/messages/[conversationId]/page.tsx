@@ -23,7 +23,7 @@ type Message = {
 export default async function ConversationPage({
   params,
 }: {
-  params: { conversationId: string };
+  params: Promise<{ conversationId: string }>;
 }) {
   const session = await getServerSession(authOptions);
   
@@ -32,7 +32,7 @@ export default async function ConversationPage({
   }
   
   // Ensure params is awaited before using its properties
-  const conversationId = params.conversationId;
+  const { conversationId } = await params;
   
   if (!conversationId) {
     notFound();
