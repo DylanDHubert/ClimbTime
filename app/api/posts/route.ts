@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
 import { prisma } from "@/app/lib/prisma";
@@ -12,7 +12,7 @@ const postSchema = z.object({
 });
 
 // Create a new post
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     // Get the session using the auth options
     const session = await getServerSession(authOptions);
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
 }
 
 // Get all posts
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const feedType = searchParams.get('feedType');

@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { hash } from "bcrypt";
 import { z } from "zod";
 import { prisma } from "@/app/lib/prisma";
@@ -10,7 +10,7 @@ const userSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     
