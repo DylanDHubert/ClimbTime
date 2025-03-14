@@ -13,7 +13,8 @@ type Post = {
   id: string;
   content: string;
   imageUrl: string | null;
-  createdAt: string;
+  createdAt: string | Date;
+  userId: string;
   user: User;
   _count?: {
     likes: number;
@@ -74,7 +75,7 @@ export async function GET(request: NextRequest) {
     
     // For each post, check if the current user has liked it
     const postsWithLikeStatus = await Promise.all(
-      posts.map(async (post: Post) => {
+      posts.map(async (post: any) => {
         const like = await prisma.like.findFirst({
           where: {
             postId: post.id,
@@ -84,6 +85,7 @@ export async function GET(request: NextRequest) {
         
         return {
           ...post,
+          createdAt: post.createdAt instanceof Date ? post.createdAt.toISOString() : post.createdAt,
           isLiked: !!like,
         };
       })
