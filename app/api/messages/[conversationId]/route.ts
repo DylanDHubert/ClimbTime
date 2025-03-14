@@ -5,7 +5,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { conversationId: string } }
+  context: { params: { conversationId: string } }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -17,7 +17,7 @@ export async function GET(
       );
     }
     
-    const { conversationId } = params;
+    const { conversationId } = context.params;
     
     // Verify the conversation exists and the user is part of it
     const conversation = await prisma.conversation.findUnique({
