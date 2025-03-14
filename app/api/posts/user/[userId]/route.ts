@@ -5,7 +5,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  context: { params: { userId: string } }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -18,7 +18,7 @@ export async function GET(
     }
     
     // Ensure params is awaited before using its properties
-    const userId = params.userId;
+    const userId = context.params.userId;
     
     if (!userId) {
       return NextResponse.json(
