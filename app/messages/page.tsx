@@ -20,7 +20,7 @@ type User = {
 type Message = {
   id: string;
   content: string;
-  createdAt: string;
+  createdAt: string | Date;
   senderId: string;
   receiverId: string;
   read: boolean;
@@ -30,12 +30,25 @@ type Conversation = {
   id: string;
   initiatorId: string;
   receiverId: string;
-  createdAt: string;
-  updatedAt: string;
-  lastMessageAt: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  lastMessageAt: string | Date;
   initiator: User;
   receiver: User;
   messages: Message[];
+};
+
+// Helper function to convert dates to strings in an object
+const convertDatesToStrings = (obj: any) => {
+  const newObj = { ...obj };
+  Object.keys(newObj).forEach(key => {
+    if (newObj[key] instanceof Date) {
+      newObj[key] = newObj[key].toISOString();
+    } else if (typeof newObj[key] === 'object' && newObj[key] !== null) {
+      newObj[key] = convertDatesToStrings(newObj[key]);
+    }
+  });
+  return newObj;
 };
 
 export default async function MessagesPage() {
@@ -107,7 +120,7 @@ export default async function MessagesPage() {
     
     // Count unread messages for each conversation
     const conversationsWithUnreadCount = await Promise.all(
-      conversations.map(async (conversation: Conversation) => {
+      conversations.map(async (conversation: any) => {
         const unreadCount = await prisma.message.count({
           where: {
             conversationId: conversation.id,
@@ -117,7 +130,7 @@ export default async function MessagesPage() {
         });
         
         return {
-          ...conversation,
+          ...convertDatesToStrings(conversation),
           unreadCount,
         };
       })
