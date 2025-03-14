@@ -20,6 +20,19 @@ type Message = {
   read: boolean;
 };
 
+// Helper function to convert dates to strings in an object
+const convertDatesToStrings = (obj: any) => {
+  const newObj = { ...obj };
+  Object.keys(newObj).forEach(key => {
+    if (newObj[key] instanceof Date) {
+      newObj[key] = newObj[key].toISOString();
+    } else if (typeof newObj[key] === 'object' && newObj[key] !== null) {
+      newObj[key] = convertDatesToStrings(newObj[key]);
+    }
+  });
+  return newObj;
+};
+
 export default async function ConversationPage({
   params,
 }: {
@@ -100,11 +113,15 @@ export default async function ConversationPage({
     });
   }
   
+  // Convert dates to strings for client components
+  const conversationWithStringDates = convertDatesToStrings(conversation);
+  const messagesWithStringDates = messages.map((msg: Message) => convertDatesToStrings(msg));
+  
   return (
     <div className="max-w-2xl mx-auto">
       <ConversationClient
-        conversation={conversation}
-        messages={messages}
+        conversation={conversationWithStringDates}
+        messages={messagesWithStringDates}
         currentUserId={session.user.id}
         otherUser={otherUser}
       />

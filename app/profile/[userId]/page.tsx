@@ -10,6 +10,19 @@ export const metadata: Metadata = {
   description: "View user profile",
 };
 
+// Helper function to convert dates to strings in an object
+const convertDatesToStrings = (obj: any) => {
+  const newObj = { ...obj };
+  Object.keys(newObj).forEach(key => {
+    if (newObj[key] instanceof Date) {
+      newObj[key] = newObj[key].toISOString();
+    } else if (typeof newObj[key] === 'object' && newObj[key] !== null) {
+      newObj[key] = convertDatesToStrings(newObj[key]);
+    }
+  });
+  return newObj;
+};
+
 export default async function UserProfilePage({ params }: { params: Promise<{ userId: string }> }) {
   const session = await getServerSession(authOptions);
   
@@ -62,10 +75,13 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
     isFollowing = !!followRecord;
   }
   
+  // Convert any Date objects to strings
+  const userWithStringDates = convertDatesToStrings(user);
+  
   return (
     <div className="max-w-2xl mx-auto">
       <UserProfileClient 
-        user={user} 
+        user={userWithStringDates} 
         isCurrentUser={session?.user?.id === userId}
         isFollowing={isFollowing}
         currentUserId={session?.user?.id}
