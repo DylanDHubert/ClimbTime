@@ -1,4 +1,4 @@
-# HotMess - Social Media Platform
+# NAMETBD - Climbing! Social Media Platform
 
 A modern social media platform built with Next.js, React, Tailwind CSS, and Prisma.
 
