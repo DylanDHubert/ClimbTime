@@ -128,6 +128,7 @@ export async function GET(request: NextRequest) {
             select: {
               likes: true,
               comments: true,
+              shares: true,
             },
           },
         },
@@ -153,6 +154,7 @@ export async function GET(request: NextRequest) {
           select: {
             likes: true,
             comments: true,
+            shares: true,
           },
         },
       },

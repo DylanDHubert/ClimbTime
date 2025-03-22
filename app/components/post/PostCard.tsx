@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { HeartIcon, ChatBubbleLeftIcon, ShareIcon, UserPlusIcon, UserMinusIcon } from "@heroicons/react/24/outline";
-import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
+import { HeartIcon as HeartIconSolid, ShareIcon as ShareIconSolid, ChatBubbleLeftIcon as ChatBubbleLeftIconSolid } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 
 type User = {
@@ -24,7 +24,15 @@ type Post = {
   _count?: {
     likes: number;
     comments: number;
+    shares?: number;
   };
+};
+
+type Comment = {
+  id: string;
+  content: string;
+  createdAt: string;
+  user: User;
 };
 
 interface PostCardProps {
@@ -35,10 +43,18 @@ export default function PostCard({ post }: PostCardProps) {
   const { data: session } = useSession();
   const router = useRouter();
   const [liked, setLiked] = useState(false);
+  const [shared, setShared] = useState(false);
   const [likeCount, setLikeCount] = useState(post._count?.likes || 0);
+  const [shareCount, setShareCount] = useState(post._count?.shares || 0);
+  const [commentCount, setCommentCount] = useState(post._count?.comments || 0);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLoadingFollow, setIsLoadingFollow] = useState(false);
   const [isCheckingFollow, setIsCheckingFollow] = useState(true);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [showComments, setShowComments] = useState(false);
+  const [newComment, setNewComment] = useState("");
+  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
+  const commentInputRef = useRef<HTMLInputElement>(null);
   
   // Check if the current user is following the post author
   useEffect(() => {
@@ -64,15 +80,187 @@ export default function PostCard({ post }: PostCardProps) {
     checkFollowStatus();
   }, [session, post.user.id]);
   
-  const handleLike = () => {
-    if (liked) {
-      setLikeCount(prev => prev - 1);
-    } else {
-      setLikeCount(prev => prev + 1);
-    }
-    setLiked(!liked);
+  // Check like status and count when component mounts
+  useEffect(() => {
+    const checkLikeStatus = async () => {
+      if (!session?.user?.id) return;
+      
+      try {
+        const response = await fetch(`/api/posts/like?postId=${post.id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setLiked(data.isLiked);
+          setLikeCount(data.likeCount);
+        }
+      } catch (error) {
+        console.error("Error checking like status:", error);
+      }
+    };
     
-    // TODO: Implement actual like functionality with API
+    checkLikeStatus();
+  }, [post.id, session?.user?.id]);
+  
+  // Check share status and count when component mounts
+  useEffect(() => {
+    const checkShareStatus = async () => {
+      if (!session?.user?.id) return;
+      
+      try {
+        const response = await fetch(`/api/posts/share?postId=${post.id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setShared(data.isShared);
+          setShareCount(data.shareCount);
+        }
+      } catch (error) {
+        console.error("Error checking share status:", error);
+      }
+    };
+    
+    checkShareStatus();
+  }, [post.id, session?.user?.id]);
+  
+  // Load comments when the comment section is opened
+  useEffect(() => {
+    if (!showComments) return;
+    
+    const loadComments = async () => {
+      try {
+        const response = await fetch(`/api/posts/comment?postId=${post.id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setComments(data);
+        }
+      } catch (error) {
+        console.error("Error loading comments:", error);
+      }
+    };
+    
+    loadComments();
+  }, [post.id, showComments]);
+  
+  const handleLike = async () => {
+    if (!session?.user) {
+      router.push('/login');
+      return;
+    }
+    
+    // Store current state before updating
+    const wasLiked = liked;
+    
+    // Optimistic UI update
+    setLiked(prevLiked => !prevLiked);
+    setLikeCount(prevCount => wasLiked ? prevCount - 1 : prevCount + 1);
+    
+    try {
+      const response = await fetch('/api/posts/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ postId: post.id }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        // Update state based on actual server response
+        setLiked(data.liked);
+      } else {
+        // Revert optimistic update on failure
+        setLiked(wasLiked);
+        setLikeCount(prevCount => wasLiked ? prevCount + 1 : prevCount - 1);
+        console.error('Failed to like/unlike post');
+      }
+    } catch (error) {
+      // Revert optimistic update on error
+      setLiked(wasLiked);
+      setLikeCount(prevCount => wasLiked ? prevCount + 1 : prevCount - 1);
+      console.error('Error liking/unliking post:', error);
+    }
+  };
+  
+  const handleShare = async () => {
+    if (!session?.user) {
+      router.push('/login');
+      return;
+    }
+    
+    // Store current state before updating
+    const wasShared = shared;
+    
+    // Optimistic UI update
+    setShared(prevShared => !prevShared);
+    setShareCount(prevCount => wasShared ? prevCount - 1 : prevCount + 1);
+    
+    try {
+      const response = await fetch('/api/posts/share', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ postId: post.id }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        // Update state based on actual server response
+        setShared(data.shared);
+      } else {
+        // Revert optimistic update on failure
+        setShared(wasShared);
+        setShareCount(prevCount => wasShared ? prevCount + 1 : prevCount - 1);
+        console.error('Failed to share/unshare post');
+      }
+    } catch (error) {
+      // Revert optimistic update on error
+      setShared(wasShared);
+      setShareCount(prevCount => wasShared ? prevCount + 1 : prevCount - 1);
+      console.error('Error sharing/unsharing post:', error);
+    }
+  };
+  
+  const handleComment = () => {
+    setShowComments(!showComments);
+    if (!showComments && commentInputRef.current) {
+      setTimeout(() => {
+        commentInputRef.current?.focus();
+      }, 100);
+    }
+  };
+  
+  const submitComment = async () => {
+    if (!session?.user || !newComment.trim()) {
+      return;
+    }
+    
+    setIsSubmittingComment(true);
+    
+    try {
+      const response = await fetch('/api/posts/comment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          postId: post.id,
+          content: newComment.trim(),
+        }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        // Add the new comment to the list and increment count
+        setComments(prevComments => [data.comment, ...prevComments]);
+        setCommentCount(prevCount => prevCount + 1);
+        setNewComment('');
+      } else {
+        console.error('Failed to add comment');
+      }
+    } catch (error) {
+      console.error('Error adding comment:', error);
+    } finally {
+      setIsSubmittingComment(false);
+    }
   };
   
   const handleFollowToggle = async () => {
@@ -187,8 +375,9 @@ export default function PostCard({ post }: PostCardProps) {
       {/* Post Stats */}
       <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-500 dark:text-gray-400">
         <div className="flex justify-between">
-          <span>{likeCount} likes</span>
-          <span>{post._count?.comments || 0} comments</span>
+          <span>{likeCount} {likeCount === 1 ? 'like' : 'likes'}</span>
+          <span>{commentCount} {commentCount === 1 ? 'comment' : 'comments'}</span>
+          <span>{shareCount} {shareCount === 1 ? 'share' : 'shares'}</span>
         </div>
       </div>
       
@@ -210,16 +399,121 @@ export default function PostCard({ post }: PostCardProps) {
           <span>Like</span>
         </button>
         
-        <button className="flex items-center space-x-1 px-3 py-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-          <ChatBubbleLeftIcon className="h-5 w-5" />
+        <button 
+          onClick={handleComment}
+          className={`flex items-center space-x-1 px-3 py-1 rounded-md ${
+            showComments 
+              ? "text-blue-600 dark:text-blue-400" 
+              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+          }`}
+        >
+          {showComments ? (
+            <ChatBubbleLeftIconSolid className="h-5 w-5" />
+          ) : (
+            <ChatBubbleLeftIcon className="h-5 w-5" />
+          )}
           <span>Comment</span>
         </button>
         
-        <button className="flex items-center space-x-1 px-3 py-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-          <ShareIcon className="h-5 w-5" />
+        <button 
+          onClick={handleShare}
+          className={`flex items-center space-x-1 px-3 py-1 rounded-md ${
+            shared 
+              ? "text-green-600 dark:text-green-400" 
+              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+          }`}
+        >
+          {shared ? (
+            <ShareIconSolid className="h-5 w-5" />
+          ) : (
+            <ShareIcon className="h-5 w-5" />
+          )}
           <span>Share</span>
         </button>
       </div>
+      
+      {/* Comments Section */}
+      {showComments && (
+        <div className="px-4 py-3 border-t border-gray-100 dark:border-gray-700">
+          {/* Comment Input */}
+          {session?.user && (
+            <div className="flex items-center mb-4">
+              <div className="relative w-8 h-8 rounded-full overflow-hidden mr-2">
+                {session.user.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-sm">
+                    {session.user.name?.charAt(0) || "U"}
+                  </div>
+                )}
+              </div>
+              <input
+                ref={commentInputRef}
+                type="text"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Write a comment..."
+                className="flex-1 py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey && !isSubmittingComment) {
+                    e.preventDefault();
+                    submitComment();
+                  }
+                }}
+              />
+              <button
+                onClick={submitComment}
+                disabled={isSubmittingComment || !newComment.trim()}
+                className="ml-2 px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium disabled:opacity-50"
+              >
+                {isSubmittingComment ? "Posting..." : "Post"}
+              </button>
+            </div>
+          )}
+          
+          {/* Comments List */}
+          <div className="space-y-3 max-h-80 overflow-y-auto">
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <div key={comment.id} className="flex">
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden mr-2 flex-shrink-0">
+                    {comment.user.image ? (
+                      <Image
+                        src={comment.user.image}
+                        alt={comment.user.name || "User"}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-sm">
+                        {comment.user.name?.charAt(0) || "U"}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <div className="bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2">
+                      <Link href={`/profile/${comment.user.id}`} className="font-medium text-gray-900 dark:text-white hover:underline">
+                        {comment.user.name || "Anonymous User"}
+                      </Link>
+                      <p className="text-sm text-gray-800 dark:text-gray-200">{comment.content}</p>
+                    </div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 ml-1">
+                      {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-gray-500 dark:text-gray-400 py-4">No comments yet. Be the first to comment!</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 } 
