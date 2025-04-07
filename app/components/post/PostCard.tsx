@@ -336,7 +336,7 @@ export default function PostCard({ post }: PostCardProps) {
             disabled={isLoadingFollow}
             className={`flex items-center space-x-1 px-3 py-1 rounded-md text-sm ${
               isFollowing
-                ? "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                ? "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
                 : "bg-blue-600 text-white"
             }`}
           >
@@ -388,7 +388,7 @@ export default function PostCard({ post }: PostCardProps) {
           className={`flex items-center space-x-1 px-3 py-1 rounded-md ${
             liked 
               ? "text-red-600 dark:text-red-400" 
-              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
           }`}
         >
           {liked ? (
@@ -404,7 +404,7 @@ export default function PostCard({ post }: PostCardProps) {
           className={`flex items-center space-x-1 px-3 py-1 rounded-md ${
             showComments 
               ? "text-blue-600 dark:text-blue-400" 
-              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
           }`}
         >
           {showComments ? (
@@ -420,7 +420,7 @@ export default function PostCard({ post }: PostCardProps) {
           className={`flex items-center space-x-1 px-3 py-1 rounded-md ${
             shared 
               ? "text-green-600 dark:text-green-400" 
-              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+              : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
           }`}
         >
           {shared ? (
@@ -458,7 +458,7 @@ export default function PostCard({ post }: PostCardProps) {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Write a comment..."
-                className="flex-1 py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey && !isSubmittingComment) {
                     e.preventDefault();
@@ -496,7 +496,7 @@ export default function PostCard({ post }: PostCardProps) {
                     )}
                   </div>
                   <div className="flex-1">
-                    <div className="bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2">
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2">
                       <Link href={`/profile/${comment.user.id}`} className="font-medium text-gray-900 dark:text-white hover:underline">
                         {comment.user.name || "Anonymous User"}
                       </Link>

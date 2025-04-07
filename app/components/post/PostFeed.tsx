@@ -93,7 +93,7 @@ export default function PostFeed({ defaultFeedType = "all" }: PostFeedProps) {
               className={`px-4 py-2 rounded-md font-medium ${
                 feedType === "all"
                   ? "bg-blue-600 text-white"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
             >
               All Posts
@@ -103,7 +103,7 @@ export default function PostFeed({ defaultFeedType = "all" }: PostFeedProps) {
               className={`px-4 py-2 rounded-md font-medium ${
                 feedType === "following"
                   ? "bg-blue-600 text-white"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
             >
               Following

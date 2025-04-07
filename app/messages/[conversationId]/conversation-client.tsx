@@ -192,14 +192,14 @@ export default function ConversationClient({
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Type a message..."
-          className="flex-1 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="flex-1 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
         />
         <button
           type="submit"
           disabled={!newMessage.trim() || isSending}
           className={`ml-2 p-2 rounded-full ${
             !newMessage.trim() || isSending
-              ? "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
+              ? "bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-500"
               : "bg-blue-600 text-white hover:bg-blue-700"
           }`}
         >

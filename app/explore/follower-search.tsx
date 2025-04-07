@@ -202,7 +202,7 @@ export default function FollowerSearch({ onSearchResults, onClearSearch }: Follo
                 <div className="p-2 border-b border-gray-200 dark:border-gray-700">
                   <button
                     onClick={handlePostsClick}
-                    className="w-full text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                    className="w-full text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
                   >
                     <p className="font-medium text-gray-900 dark:text-white">
                       {searchResults.posts.length} posts matching "{debouncedQuery}"
@@ -225,7 +225,7 @@ export default function FollowerSearch({ onSearchResults, onClearSearch }: Follo
                         <div className="flex items-center justify-between">
                           <Link 
                             href={`/profile/${user.id}`}
-                            className="flex items-center hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-md w-full"
+                            className="flex items-center hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-md w-full"
                           >
                             <div className="relative h-10 w-10 rounded-full overflow-hidden mr-3">
                               {user.image ? (

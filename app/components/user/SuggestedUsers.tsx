@@ -163,7 +163,7 @@ export default function SuggestedUsers() {
               disabled={loadingFollow[user.id]}
               className={`flex items-center justify-center flex-shrink-0 px-3 py-1 rounded-md text-sm whitespace-nowrap ${
                 followingStatus[user.id]
-                  ? "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                  ? "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
                   : "bg-blue-600 text-white"
               }`}
             >

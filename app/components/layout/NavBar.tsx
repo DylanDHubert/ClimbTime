@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { HomeIcon, PlusCircleIcon, UserIcon, GlobeAltIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
-import { HomeIcon as HomeIconSolid, PlusCircleIcon as PlusCircleIconSolid, UserIcon as UserIconSolid, GlobeAltIcon as GlobeAltIconSolid, ChatBubbleLeftRightIcon as ChatBubbleLeftRightIconSolid } from "@heroicons/react/24/solid";
+import { HomeIcon as HomeIconSolid, PlusCircleIcon as PlusCircleIconSolid, UserIcon as UserIconSolid, GlobeAltIcon as GlobeAltIconSolid, ChatBubbleLeftRightIcon as ChatBubbleLeftRightIconSolid, StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
@@ -37,6 +37,12 @@ const navItems = [
     label: "Explore",
     icon: GlobeAltIcon,
     activeIcon: GlobeAltIconSolid
+  },
+  {
+    path: "/grade",
+    label: "Grade",
+    icon: StarIconSolid,
+    activeIcon: StarIconSolid
   }
 ];
 
@@ -81,7 +87,7 @@ export default function NavBar() {
   }, [pathname, session?.user?.id]);
   
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-sm md:sticky md:top-0 md:border-t-0 md:border-b md:z-10">
+    <nav className="fixed bottom-0 left-0 right-0 bg-black dark:bg-black border-t border-gray-200 dark:border-gray-700 shadow-sm md:sticky md:top-0 md:border-t-0 md:border-b md:z-10">
       <div className="container mx-auto px-4">
         <div className="flex justify-between md:justify-center md:space-x-16">
           {navItems.map((item) => {

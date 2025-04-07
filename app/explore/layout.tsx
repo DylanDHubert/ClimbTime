@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Explore | SocialApp",
+  title: "Explore | ClimbTime",
   description: "Discover posts from all users",
 };
 

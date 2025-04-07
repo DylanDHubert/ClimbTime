@@ -186,7 +186,7 @@ export default function UserProfileClient({
                 disabled={isLoading}
                 className={`px-4 py-2 rounded-md font-medium ${
                   isFollowing 
-                    ? 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600' 
+                    ? 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600' 
                     : 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white'
                 }`}
               >
@@ -197,7 +197,7 @@ export default function UserProfileClient({
             {isCurrentUser && (
               <Link 
                 href="/profile"
-                className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md font-medium"
+                className="px-4 py-2 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md font-medium"
               >
                 Edit Profile
               </Link>

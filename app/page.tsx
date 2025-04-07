@@ -5,7 +5,7 @@ import { PlusCircleIcon } from "@heroicons/react/24/outline";
 
 export default async function Home() {
   const session = await getServerSession();
-  
+
   return (
     <div className="max-w-2xl mx-auto">
       {session ? (
@@ -25,7 +25,7 @@ export default async function Home() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">Welcome to SocialApp</h1>
+          <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">Welcome to ClimbTime</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-xl mx-auto leading-relaxed">
             Connect with friends, share your moments, and discover interesting content from people around the world.
           </p>
@@ -38,7 +38,7 @@ export default async function Home() {
             </Link>
             <Link
               href="/signup"
-              className="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition shadow-sm"
+              className="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition shadow-sm"
             >
               Sign Up
             </Link>

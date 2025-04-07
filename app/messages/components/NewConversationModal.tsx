@@ -140,7 +140,7 @@ export default function NewConversationModal({
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 dark:focus:placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:text-white"
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 dark:focus:placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:text-white"
                     placeholder="Search for mutual followers..."
                   />
                   {searchQuery && (
@@ -168,7 +168,7 @@ export default function NewConversationModal({
                         <li key={user.id} className="py-2">
                           <button
                             onClick={() => startConversation(user.id)}
-                            className="w-full flex items-center p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+                            className="w-full flex items-center p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
                           >
                             <div className="relative h-10 w-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
                               {user.image ? (
@@ -197,7 +197,7 @@ export default function NewConversationModal({
                 <div className="mt-4 flex justify-end">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-gray-200 dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-gray-200 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={onClose}
                   >
                     Cancel

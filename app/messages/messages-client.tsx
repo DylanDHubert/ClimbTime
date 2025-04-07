@@ -83,7 +83,7 @@ export default function MessagesClient({ conversations, currentUserId }: Message
                 <li key={conversation.id}>
                   <Link 
                     href={`/messages/${conversation.id}`}
-                    className="block hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="block hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                   >
                     <div className="flex items-center p-4">
                       <div className="relative h-12 w-12 rounded-full overflow-hidden mr-4 flex-shrink-0">

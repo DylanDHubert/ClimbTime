@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import LoginForm from "@/app/components/auth/LoginForm";
 
 export const metadata: Metadata = {
-  title: "Log In | SocialApp",
-  description: "Log in to your SocialApp account",
+  title: "Log In | ClimbTime",
+  description: "Log in to your ClimbTime account",
 };
 
 export default async function LoginPage() {
