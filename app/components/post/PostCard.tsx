@@ -314,7 +314,7 @@ export default function PostCard({ post }: PostCardProps) {
                 className="object-cover"
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg">
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#A4A2FF] to-[#A4A2FF]/80 text-white font-bold text-lg">
                 {post.user.name?.charAt(0) || "U"}
               </div>
             )}
@@ -337,7 +337,7 @@ export default function PostCard({ post }: PostCardProps) {
             className={`flex items-center space-x-1 px-3 py-1 rounded-md text-sm ${
               isFollowing
                 ? "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
-                : "bg-blue-600 text-white"
+                : "bg-[#FDFFA2] text-black shadow-sm hover:bg-[#FDFFA2]/80"
             }`}
           >
             {isFollowing ? (
@@ -403,7 +403,7 @@ export default function PostCard({ post }: PostCardProps) {
           onClick={handleComment}
           className={`flex items-center space-x-1 px-3 py-1 rounded-md ${
             showComments 
-              ? "text-blue-600 dark:text-blue-400" 
+              ? "text-[#A4A2FF] dark:text-[#A4A2FF]" 
               : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
           }`}
         >
@@ -447,7 +447,7 @@ export default function PostCard({ post }: PostCardProps) {
                     className="object-cover"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-sm">
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#A4A2FF] to-[#A4A2FF]/80 text-white font-bold text-sm">
                     {session.user.name?.charAt(0) || "U"}
                   </div>
                 )}
@@ -458,7 +458,7 @@ export default function PostCard({ post }: PostCardProps) {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Write a comment..."
-                className="flex-1 py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#A4A2FF]"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey && !isSubmittingComment) {
                     e.preventDefault();
@@ -469,7 +469,7 @@ export default function PostCard({ post }: PostCardProps) {
               <button
                 onClick={submitComment}
                 disabled={isSubmittingComment || !newComment.trim()}
-                className="ml-2 px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium disabled:opacity-50"
+                className="ml-2 px-3 py-2 bg-[#FDFFA2] hover:bg-[#FDFFA2]/80 text-black rounded-lg text-sm font-medium disabled:opacity-50"
               >
                 {isSubmittingComment ? "Posting..." : "Post"}
               </button>
@@ -490,7 +490,7 @@ export default function PostCard({ post }: PostCardProps) {
                         className="object-cover"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-sm">
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#A4A2FF] to-[#A4A2FF]/80 text-white font-bold text-sm">
                         {comment.user.name?.charAt(0) || "U"}
                       </div>
                     )}

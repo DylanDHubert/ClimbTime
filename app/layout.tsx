@@ -34,9 +34,9 @@ export default async function RootLayout({
       >
         <AuthProvider>
           <Header />
-          <div className="flex-grow flex flex-col bg-black">
+          <div className="flex-grow flex flex-col bg-white">
             {session && <NavBar />}
-            <main className="flex-grow container mx-auto px-4 py-6 md:py-8 mb-16 md:mb-0 bg-black">
+            <main className="flex-grow container mx-auto px-4 py-6 md:py-8 mb-16 md:mb-0 bg-white">
               {children}
             </main>
           </div>

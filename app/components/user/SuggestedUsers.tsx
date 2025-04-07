@@ -144,7 +144,7 @@ export default function SuggestedUsers() {
                     className="object-cover"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg">
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#A4A2FF] to-[#A4A2FF]/80 text-white font-bold text-lg">
                     {user.name?.charAt(0) || "U"}
                   </div>
                 )}
@@ -164,7 +164,7 @@ export default function SuggestedUsers() {
               className={`flex items-center justify-center flex-shrink-0 px-3 py-1 rounded-md text-sm whitespace-nowrap ${
                 followingStatus[user.id]
                   ? "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
-                  : "bg-blue-600 text-white"
+                  : "bg-[#FDFFA2] text-black shadow-sm hover:bg-[#FDFFA2]/80"
               }`}
             >
               {followingStatus[user.id] ? (

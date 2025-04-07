@@ -120,21 +120,21 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
   };
   
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden">
-      <div className="p-4 border-b dark:border-gray-700 flex justify-between items-center">
-        <h2 className="text-xl font-bold">Edit Profile</h2>
+    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden">
+      <div className="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-gradient-to-r from-[#A4A2FF] to-[#A4A2FF]/80">
+        <h2 className="text-xl font-bold text-white">Edit Profile</h2>
         <button 
           onClick={onClose}
-          className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"
+          className="p-1 rounded-full hover:bg-white/20 text-white transition-colors"
         >
           <XMarkIcon className="h-6 w-6" />
         </button>
       </div>
       
-      <form ref={formRef} onSubmit={handleSubmit} className="p-4">
+      <form ref={formRef} onSubmit={handleSubmit} className="p-6">
         {/* Banner Image */}
         <div className="relative mb-6">
-          <div className="h-32 bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden">
+          <div className="h-32 bg-gradient-to-br from-gray-200 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-lg overflow-hidden shadow-md">
             {bannerPreview ? (
               <Image 
                 src={bannerPreview} 
@@ -152,7 +152,7 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
           <button
             type="button"
             onClick={() => bannerInputRef.current?.click()}
-            className="absolute bottom-2 right-2 bg-black bg-opacity-60 text-white p-2 rounded-full hover:bg-opacity-80"
+            className="absolute bottom-2 right-2 bg-black bg-opacity-60 text-white p-2 rounded-full hover:bg-opacity-80 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
           >
             <PhotoIcon className="h-5 w-5" />
           </button>
@@ -168,8 +168,8 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
         
         {/* Profile Picture */}
         <div className="relative mb-6 flex justify-center">
-          <div className="absolute -top-16 bg-white dark:bg-gray-900 p-1 rounded-full">
-            <div className="h-24 w-24 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800">
+          <div className="absolute -top-16 bg-white dark:bg-gray-900 p-1 rounded-full shadow-lg">
+            <div className="h-24 w-24 rounded-full overflow-hidden bg-gradient-to-br from-gray-200 to-gray-100 dark:from-gray-800 dark:to-gray-700">
               {profilePreview ? (
                 <Image 
                   src={profilePreview} 
@@ -187,7 +187,7 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
             <button
               type="button"
               onClick={() => profileInputRef.current?.click()}
-              className="absolute bottom-1 right-1 bg-black bg-opacity-60 text-white p-1.5 rounded-full hover:bg-opacity-80"
+              className="absolute bottom-1 right-1 bg-black bg-opacity-60 text-white p-1.5 rounded-full hover:bg-opacity-80 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
             >
               <PhotoIcon className="h-4 w-4" />
             </button>
@@ -205,7 +205,7 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
         {/* Form Fields */}
         <div className="mt-16 space-y-4">
           {errors.form && (
-            <div className="text-red-500 text-sm p-2 bg-red-50 dark:bg-red-900/20 rounded">
+            <div className="text-red-500 text-sm p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
               {errors.form}
             </div>
           )}
@@ -219,7 +219,7 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
               id="name"
               name="name"
               defaultValue={session.user?.name || ""}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+              className="mt-1 block w-full rounded-md border-gray-200 dark:border-gray-700 shadow-sm focus:border-[#A4A2FF] focus:ring-[#A4A2FF] dark:bg-gray-800 transition-colors"
             />
             {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
           </div>
@@ -233,7 +233,7 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
               name="bio"
               rows={3}
               defaultValue={session.user?.bio || ""}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+              className="mt-1 block w-full rounded-md border-gray-200 dark:border-gray-700 shadow-sm focus:border-[#A4A2FF] focus:ring-[#A4A2FF] dark:bg-gray-800 transition-colors"
             ></textarea>
             {errors.bio && <p className="mt-1 text-sm text-red-500">{errors.bio}</p>}
           </div>
@@ -247,7 +247,7 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
               id="location"
               name="location"
               defaultValue={session.user?.location || ""}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+              className="mt-1 block w-full rounded-md border-gray-200 dark:border-gray-700 shadow-sm focus:border-[#A4A2FF] focus:ring-[#A4A2FF] dark:bg-gray-800 transition-colors"
             />
             {errors.location && <p className="mt-1 text-sm text-red-500">{errors.location}</p>}
           </div>
@@ -262,7 +262,7 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
               name="website"
               placeholder="https://example.com"
               defaultValue={session.user?.website || ""}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
+              className="mt-1 block w-full rounded-md border-gray-200 dark:border-gray-700 shadow-sm focus:border-[#A4A2FF] focus:ring-[#A4A2FF] dark:bg-gray-800 transition-colors"
             />
             {errors.website && <p className="mt-1 text-sm text-red-500">{errors.website}</p>}
           </div>
@@ -272,16 +272,24 @@ export default function EditProfileForm({ session, onClose }: EditProfileFormPro
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-blue-500 dark:hover:bg-blue-600"
+            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-[#FDFFA2] hover:bg-[#FDFFA2]/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A4A2FF] disabled:opacity-50 disabled:cursor-not-allowed dark:bg-[#FDFFA2] dark:hover:bg-[#FDFFA2]/80 dark:text-black dark:focus:ring-[#A4A2FF] transition-all duration-200 transform hover:scale-[1.02]"
           >
-            {isLoading ? "Saving..." : "Save"}
+            {isLoading ? (
+              <span className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Saving...
+              </span>
+            ) : "Save"}
           </button>
         </div>
       </form>
