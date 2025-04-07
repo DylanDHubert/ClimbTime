@@ -86,14 +86,14 @@ export default function PostFeed({ defaultFeedType = "all" }: PostFeedProps) {
   return (
     <div>
       {session?.user && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4">
+        <div className="bg-white rounded-lg shadow-md p-4 mb-4">
           <div className="flex justify-center space-x-4">
             <button
               onClick={() => handleFeedTypeChange("all")}
               className={`px-4 py-2 rounded-md font-medium ${
                 feedType === "all"
                   ? "bg-[#FDFFA2] text-black shadow-sm"
-                  : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
               }`}
             >
               All Posts
@@ -103,7 +103,7 @@ export default function PostFeed({ defaultFeedType = "all" }: PostFeedProps) {
               className={`px-4 py-2 rounded-md font-medium ${
                 feedType === "following"
                   ? "bg-[#FDFFA2] text-black shadow-sm"
-                  : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
               }`}
             >
               Following
@@ -113,13 +113,13 @@ export default function PostFeed({ defaultFeedType = "all" }: PostFeedProps) {
       )}
 
       {posts.length === 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center">
-          <h2 className="text-xl font-semibold mb-2 dark:text-white">
+        <div className="bg-white rounded-lg shadow-md p-6 text-center">
+          <h2 className="text-xl font-semibold mb-2">
             {feedType === "following" 
               ? "No posts from people you follow" 
               : "No posts yet"}
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-gray-600 mb-4">
             {feedType === "following" 
               ? "Follow more people to see their posts here!" 
               : "Be the first to share something with the community!"}

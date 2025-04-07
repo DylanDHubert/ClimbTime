@@ -98,7 +98,7 @@ export default function CreatePostForm() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden">
+    <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg overflow-hidden">
       <div className="bg-gradient-to-r from-[#A4A2FF] to-[#A4A2FF]/80 p-4">
         <h1 className="text-2xl font-bold text-white">Create a Post</h1>
       </div>
@@ -112,35 +112,35 @@ export default function CreatePostForm() {
         
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
               What&apos;s on your mind?
             </label>
             <textarea
               id="content"
               rows={4}
               {...register("content")}
-              className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A4A2FF] bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A4A2FF] bg-white text-gray-800 transition-colors"
               placeholder="Share your thoughts..."
               disabled={isLoading}
             />
             {errors.content && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.content.message}</p>
+              <p className="mt-1 text-sm text-red-600">{errors.content.message}</p>
             )}
           </div>
           
           {!previewImage ? (
-            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 transition-colors hover:border-[#A4A2FF] dark:hover:border-[#A4A2FF]">
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 transition-colors hover:border-[#A4A2FF]">
               <div className="text-center">
                 <label htmlFor="file-upload" className="cursor-pointer">
                   <div className="mt-2 flex justify-center">
                     <PhotoIcon className="h-12 w-12 text-[#A4A2FF]" />
                   </div>
-                  <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="mt-2 text-sm text-gray-600">
                     <span className="font-medium text-[#A4A2FF] hover:text-[#A4A2FF]/80">
                       Upload an image
                     </span> or drag and drop
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">PNG, JPG, GIF up to 4MB</p>
+                  <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 4MB</p>
                 </label>
                 <input 
                   id="file-upload" 
@@ -168,7 +168,7 @@ export default function CreatePostForm() {
               <button
                 type="button"
                 onClick={removeImage}
-                className="absolute top-3 right-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-1.5 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="absolute top-3 right-3 bg-white text-gray-800 p-1.5 rounded-full shadow-md hover:bg-gray-100 transition-colors"
               >
                 <XMarkIcon className="h-5 w-5" />
               </button>

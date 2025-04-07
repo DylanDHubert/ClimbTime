@@ -30,7 +30,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gray-50 text-gray-900`}
       >
         <AuthProvider>
           <Header />
@@ -40,13 +40,13 @@ export default async function RootLayout({
               {children}
             </main>
           </div>
-          <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-gray-600 dark:text-gray-300 text-sm">
+          <footer className="bg-white border-t border-gray-200 py-6 text-center text-gray-600 text-sm">
             <div className="container mx-auto px-4">
               <p>&copy; {new Date().getFullYear()} ClimbTime. All rights reserved.</p>
               <div className="mt-2 flex justify-center space-x-4">
-                <a href="#" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Terms</a>
-                <a href="#" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Privacy</a>
-                <a href="#" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Help</a>
+                <a href="#" className="text-gray-500 hover:text-gray-700">Terms</a>
+                <a href="#" className="text-gray-500 hover:text-gray-700">Privacy</a>
+                <a href="#" className="text-gray-500 hover:text-gray-700">Help</a>
               </div>
             </div>
           </footer>
