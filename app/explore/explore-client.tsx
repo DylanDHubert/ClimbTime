@@ -49,8 +49,8 @@ export default function ExploreClient() {
       </div>
       
       {isSearchActive && (
-        <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+        <div className="mb-6 bg-white rounded-lg shadow-md p-4">
+          <h2 className="text-lg font-medium text-gray-900 mb-2">
             {searchResults.length > 0 
               ? `Search results for "${searchQuery}"`
               : `No posts found matching "${searchQuery}"`
@@ -58,8 +58,8 @@ export default function ExploreClient() {
           </h2>
           
           {searchResults.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
-              <p className="text-gray-600 dark:text-gray-400">
+            <div className="bg-white rounded-lg p-6 text-center">
+              <p className="text-gray-600">
                 Try a different search term or browse all posts below.
               </p>
             </div>
