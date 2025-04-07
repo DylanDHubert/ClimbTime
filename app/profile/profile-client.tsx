@@ -49,7 +49,7 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
   
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden">
+      <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden">
         {/* Cover Photo */}
         <div className="h-48 relative">
           {session.user?.bannerImage ? (
@@ -60,11 +60,11 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
               className="object-cover"
             />
           ) : (
-            <div className="h-full w-full bg-gradient-to-r from-blue-500 to-purple-600"></div>
+            <div className="h-full w-full bg-gradient-to-r from-[#A4A2FF] to-[#A4A2FF]/80"></div>
           )}
           
           {/* Profile Picture */}
-          <div className="absolute -bottom-16 left-4 border-4 border-white dark:border-gray-800 rounded-full overflow-hidden h-32 w-32 bg-white dark:bg-gray-800">
+          <div className="absolute -bottom-16 left-4 border-4 border-white dark:border-gray-800 rounded-full overflow-hidden h-32 w-32 bg-white dark:bg-gray-800 shadow-lg">
             {session.user?.image ? (
               <Image
                 src={session.user.image}
@@ -73,7 +73,7 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
                 className="object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-4xl font-bold">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#A4A2FF]/20 to-[#A4A2FF]/10 dark:from-[#A4A2FF]/20 dark:to-[#A4A2FF]/10 text-[#A4A2FF] dark:text-[#A4A2FF] text-4xl font-bold">
                 {session.user?.name?.charAt(0) || "U"}
               </div>
             )}
@@ -82,14 +82,14 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
           {/* Edit Profile Button (Small) */}
           <button 
             onClick={() => setIsEditModalOpen(true)}
-            className="absolute top-4 right-4 p-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full"
+            className="absolute top-4 right-4 p-2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
           >
             <PencilIcon className="h-5 w-5" />
           </button>
         </div>
         
         {/* Profile Info */}
-        <div className="pt-20 px-4 pb-4">
+        <div className="pt-20 px-6 pb-6">
           <h1 className="text-2xl font-bold dark:text-white">{session.user?.name || "User"}</h1>
           <p className="text-gray-500 dark:text-gray-400">{session.user?.email}</p>
           
@@ -111,7 +111,7 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
                 <Link 
                   href={session.user.website.startsWith('http') ? session.user.website : `https://${session.user.website}`} 
                   target="_blank"
-                  className="text-blue-500 hover:underline"
+                  className="text-[#A4A2FF] hover:underline"
                 >
                   {session.user.website.replace(/^https?:\/\//, '')}
                 </Link>
@@ -119,7 +119,7 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
             )}
           </div>
           
-          <div className="mt-6 flex space-x-4">
+          <div className="mt-6 flex space-x-6">
             <div className="text-center">
               <span className="block font-bold dark:text-white">{session.user?._count?.posts || 0}</span>
               <span className="text-sm text-gray-500 dark:text-gray-400">Posts</span>
@@ -137,7 +137,7 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
           <div className="mt-6">
             <button 
               onClick={() => setIsEditModalOpen(true)}
-              className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium rounded-md"
+              className="w-full py-2.5 px-4 bg-[#FDFFA2] hover:bg-[#FDFFA2]/80 text-black font-medium rounded-md shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02]"
             >
               Edit Profile
             </button>
@@ -145,7 +145,7 @@ export default function ProfileClient({ session, userPosts }: ProfileClientProps
         </div>
       </div>
       
-      <div className="mt-6 bg-white dark:bg-gray-900 rounded-lg shadow-md p-4">
+      <div className="mt-6 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg p-6">
         <h2 className="text-xl font-bold mb-4 dark:text-white">Your Posts</h2>
         
         {userPosts.length === 0 ? (

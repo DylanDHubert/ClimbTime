@@ -6,7 +6,7 @@ import ConversationClient from "./conversation-client";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export const metadata: Metadata = {
-  title: "Conversation | SocialApp",
+  title: "Conversation | ClimbTime",
   description: "Your private conversation",
 };
 

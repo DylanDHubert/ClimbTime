@@ -110,16 +110,16 @@ export default function ConversationClient({
   
   return (
     <div className="flex flex-col h-[calc(100vh-180px)]">
-      <div className="bg-white dark:bg-gray-800 rounded-t-lg shadow-md p-4 flex items-center">
+      <div className="bg-gradient-to-r from-[#A4A2FF] to-[#A4A2FF]/80 rounded-t-xl shadow-lg p-4 flex items-center">
         <button
           onClick={() => router.push("/messages")}
-          className="mr-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+          className="mr-2 text-white hover:text-white/80 transition-colors"
         >
           <ArrowLeftIcon className="h-5 w-5" />
         </button>
         
         <Link href={`/profile/${otherUser.id}`} className="flex items-center">
-          <div className="relative h-10 w-10 rounded-full overflow-hidden mr-3">
+          <div className="relative h-10 w-10 rounded-full overflow-hidden mr-3 shadow-md">
             {otherUser.image ? (
               <Image
                 src={otherUser.image}
@@ -128,18 +128,18 @@ export default function ConversationClient({
                 className="object-cover"
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg">
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 text-[#A4A2FF] font-bold text-lg">
                 {otherUser.name?.charAt(0) || "U"}
               </div>
             )}
           </div>
-          <span className="font-medium text-gray-900 dark:text-white">
+          <span className="font-medium text-white">
             {otherUser.name || "User"}
           </span>
         </Link>
       </div>
       
-      <div className="flex-1 bg-gray-50 dark:bg-gray-900 p-4 overflow-y-auto">
+      <div className="flex-1 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 p-4 overflow-y-auto">
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <p className="text-gray-500 dark:text-gray-400 text-center">
@@ -157,16 +157,16 @@ export default function ConversationClient({
                   className={`flex ${isCurrentUser ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[70%] rounded-lg px-4 py-2 ${
+                    className={`max-w-[70%] rounded-lg px-4 py-2 shadow-sm ${
                       isCurrentUser
-                        ? "bg-blue-600 text-white"
+                        ? "bg-[#A4A2FF] text-white"
                         : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                     }`}
                   >
                     <p className="break-words">{message.content}</p>
                     <p
                       className={`text-xs mt-1 ${
-                        isCurrentUser ? "text-blue-200" : "text-gray-500 dark:text-gray-400"
+                        isCurrentUser ? "text-white/80" : "text-gray-500 dark:text-gray-400"
                       }`}
                     >
                       {formatDistanceToNow(new Date(message.createdAt), { addSuffix: true })}
@@ -185,26 +185,26 @@ export default function ConversationClient({
       
       <form
         onSubmit={sendMessage}
-        className="bg-white dark:bg-gray-800 rounded-b-lg shadow-md p-4 flex items-center"
+        className="bg-white dark:bg-gray-800 rounded-b-xl shadow-lg p-4 flex items-center"
       >
         <input
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Type a message..."
-          className="flex-1 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="flex-1 border border-gray-200 dark:border-gray-700 rounded-md py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#A4A2FF] focus:border-[#A4A2FF] transition-all"
         />
         <button
           type="submit"
           disabled={!newMessage.trim() || isSending}
-          className={`ml-2 p-2 rounded-full ${
+          className={`ml-2 p-2 rounded-md transition-all duration-200 ${
             !newMessage.trim() || isSending
               ? "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500"
-              : "bg-blue-600 text-white hover:bg-blue-700"
+              : "bg-[#FDFFA2] text-black hover:bg-[#FDFFA2]/80 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
           }`}
         >
           {isSending ? (
-            <div className="h-5 w-5 animate-spin rounded-full border-2 border-t-transparent border-white" />
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-t-transparent border-black" />
           ) : (
             <PaperAirplaneIcon className="h-5 w-5" />
           )}

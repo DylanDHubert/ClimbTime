@@ -6,7 +6,7 @@ import { prisma } from "@/app/lib/prisma";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export const metadata: Metadata = {
-  title: "Messages | SocialApp",
+  title: "Messages | ClimbTime",
   description: "Your private conversations",
 };
 

@@ -6,7 +6,7 @@ import UserProfileClient from "./user-profile-client";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export const metadata: Metadata = {
-  title: "User Profile | SocialApp",
+  title: "User Profile | ClimbTime",
   description: "View user profile",
 };
 

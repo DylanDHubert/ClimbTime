@@ -122,7 +122,7 @@ export default function UserProfileClient({
   
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden">
+      <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden">
         {/* Cover Photo */}
         <div className="h-48 relative">
           {user.bannerImage ? (
@@ -133,11 +133,11 @@ export default function UserProfileClient({
               className="object-cover"
             />
           ) : (
-            <div className="h-full w-full bg-gradient-to-r from-blue-500 to-purple-600"></div>
+            <div className="h-full w-full bg-gradient-to-r from-[#A4A2FF] to-[#A4A2FF]/80"></div>
           )}
           
           {/* Profile Picture */}
-          <div className="absolute -bottom-16 left-4 border-4 border-white dark:border-gray-800 rounded-full overflow-hidden h-32 w-32 bg-white dark:bg-gray-800">
+          <div className="absolute -bottom-16 left-4 border-4 border-white dark:border-gray-800 rounded-full overflow-hidden h-32 w-32 bg-white dark:bg-gray-800 shadow-lg">
             {user.image ? (
               <Image
                 src={user.image}
@@ -146,7 +146,7 @@ export default function UserProfileClient({
                 className="object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-4xl font-bold">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#A4A2FF]/20 to-[#A4A2FF]/10 dark:from-[#A4A2FF]/20 dark:to-[#A4A2FF]/10 text-[#A4A2FF] dark:text-[#A4A2FF] text-4xl font-bold">
                 {user.name?.charAt(0) || "U"}
               </div>
             )}
@@ -157,11 +157,11 @@ export default function UserProfileClient({
             <button 
               onClick={handleFollowToggle}
               disabled={isLoading}
-              className={`absolute top-4 right-4 p-2 rounded-full flex items-center space-x-1 ${
+              className={`absolute top-4 right-4 p-2 rounded-full flex items-center space-x-1 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 ${
                 isFollowing 
                   ? 'bg-gray-800 bg-opacity-70 hover:bg-opacity-90' 
-                  : 'bg-blue-600 hover:bg-blue-700'
-              } text-white`}
+                  : 'bg-[#FDFFA2] hover:bg-[#FDFFA2]/80'
+              } text-black`}
             >
               {isFollowing ? (
                 <UserMinusIcon className="h-5 w-5" />
@@ -173,7 +173,7 @@ export default function UserProfileClient({
         </div>
         
         {/* Profile Info */}
-        <div className="pt-20 px-4 pb-4">
+        <div className="pt-20 px-6 pb-6">
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-2xl font-bold dark:text-white">{user.name || "User"}</h1>
@@ -184,10 +184,10 @@ export default function UserProfileClient({
               <button 
                 onClick={handleFollowToggle}
                 disabled={isLoading}
-                className={`px-4 py-2 rounded-md font-medium ${
+                className={`px-4 py-2.5 rounded-md font-medium transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02] ${
                   isFollowing 
-                    ? 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600' 
-                    : 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white'
+                    ? 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600' 
+                    : 'bg-[#FDFFA2] hover:bg-[#FDFFA2]/80 text-black'
                 }`}
               >
                 {isLoading ? 'Loading...' : isFollowing ? 'Unfollow' : 'Follow'}
@@ -197,7 +197,7 @@ export default function UserProfileClient({
             {isCurrentUser && (
               <Link 
                 href="/profile"
-                className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md font-medium"
+                className="px-4 py-2.5 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md font-medium transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
               >
                 Edit Profile
               </Link>
@@ -222,7 +222,7 @@ export default function UserProfileClient({
                 <Link 
                   href={user.website.startsWith('http') ? user.website : `https://${user.website}`} 
                   target="_blank"
-                  className="text-blue-500 hover:underline"
+                  className="text-[#A4A2FF] hover:underline"
                 >
                   {user.website.replace(/^https?:\/\//, '')}
                 </Link>
@@ -230,7 +230,7 @@ export default function UserProfileClient({
             )}
           </div>
           
-          <div className="mt-6 flex space-x-4">
+          <div className="mt-6 flex space-x-6">
             <div className="text-center">
               <span className="block font-bold dark:text-white">{user._count.posts}</span>
               <span className="text-sm text-gray-500 dark:text-gray-400">Posts</span>
@@ -247,12 +247,12 @@ export default function UserProfileClient({
         </div>
       </div>
       
-      <div className="mt-6 bg-white dark:bg-gray-900 rounded-lg shadow-md p-4">
+      <div className="mt-6 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg p-6">
         <h2 className="text-xl font-bold mb-4 dark:text-white">{isCurrentUser ? 'Your' : 'User\'s'} Posts</h2>
         
         {isLoadingPosts ? (
           <div className="flex justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#A4A2FF]"></div>
           </div>
         ) : userPosts.length === 0 ? (
           <div className="text-center py-8 text-gray-500 dark:text-gray-400">

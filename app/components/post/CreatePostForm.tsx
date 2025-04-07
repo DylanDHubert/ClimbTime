@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const postSchema = z.object({
   content: z.string().min(1, "Content is required").max(500, "Content cannot exceed 500 characters"),
@@ -97,91 +98,102 @@ export default function CreatePostForm() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h1 className="text-2xl font-bold mb-6">Create a Post</h1>
+    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden">
+      <div className="bg-gradient-to-r from-[#A4A2FF] to-[#A4A2FF]/80 p-4">
+        <h1 className="text-2xl font-bold text-white">Create a Post</h1>
+      </div>
       
-      {error && (
-        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-          {error}
-        </div>
-      )}
-      
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div>
-          <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
-            What&apos;s on your mind?
-          </label>
-          <textarea
-            id="content"
-            rows={4}
-            {...register("content")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Share your thoughts..."
-            disabled={isLoading}
-          />
-          {errors.content && (
-            <p className="mt-1 text-sm text-red-600">{errors.content.message}</p>
-          )}
-        </div>
-        
-        {!previewImage ? (
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
-            <div className="text-center">
-              <label htmlFor="file-upload" className="cursor-pointer">
-                <div className="mt-2 flex justify-center">
-                  <svg className="h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4h-12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <div className="mt-2 text-sm text-gray-600">
-                  <span className="font-medium text-blue-600 hover:text-blue-500">
-                    Upload an image
-                  </span> or drag and drop
-                </div>
-                <p className="text-xs text-gray-500">PNG, JPG, GIF up to 4MB</p>
-              </label>
-              <input 
-                id="file-upload" 
-                name="file-upload" 
-                type="file" 
-                className="sr-only" 
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                disabled={isLoading}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="relative">
-            <div className="relative h-64 w-full overflow-hidden rounded-lg">
-              <Image
-                src={previewImage}
-                alt="Uploaded image"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <button
-              type="button"
-              onClick={removeImage}
-              className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded-full"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
+      <div className="p-6">
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+            {error}
           </div>
         )}
         
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isLoading ? "Posting..." : "Post"}
-        </button>
-      </form>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div>
+            <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              What&apos;s on your mind?
+            </label>
+            <textarea
+              id="content"
+              rows={4}
+              {...register("content")}
+              className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A4A2FF] bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors"
+              placeholder="Share your thoughts..."
+              disabled={isLoading}
+            />
+            {errors.content && (
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.content.message}</p>
+            )}
+          </div>
+          
+          {!previewImage ? (
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 transition-colors hover:border-[#A4A2FF] dark:hover:border-[#A4A2FF]">
+              <div className="text-center">
+                <label htmlFor="file-upload" className="cursor-pointer">
+                  <div className="mt-2 flex justify-center">
+                    <PhotoIcon className="h-12 w-12 text-[#A4A2FF]" />
+                  </div>
+                  <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    <span className="font-medium text-[#A4A2FF] hover:text-[#A4A2FF]/80">
+                      Upload an image
+                    </span> or drag and drop
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">PNG, JPG, GIF up to 4MB</p>
+                </label>
+                <input 
+                  id="file-upload" 
+                  name="file-upload" 
+                  type="file" 
+                  className="sr-only" 
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="relative group">
+              <div className="relative h-64 w-full overflow-hidden rounded-lg shadow-md">
+                <Image
+                  src={previewImage}
+                  alt="Uploaded image"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <button
+                type="button"
+                onClick={removeImage}
+                className="absolute top-3 right-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-1.5 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              >
+                <XMarkIcon className="h-5 w-5" />
+              </button>
+            </div>
+          )}
+          
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="px-6 py-2.5 bg-[#FDFFA2] hover:bg-[#FDFFA2]/80 text-black font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A4A2FF] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-all duration-200 transform hover:scale-[1.02]"
+            >
+              {isLoading ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Posting...
+                </span>
+              ) : "Post"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 } 

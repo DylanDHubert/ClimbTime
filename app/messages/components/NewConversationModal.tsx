@@ -140,7 +140,7 @@ export default function NewConversationModal({
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 dark:focus:placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:text-white"
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 dark:focus:placeholder-gray-500 focus:ring-1 focus:ring-[#A4A2FF] focus:border-[#A4A2FF] dark:text-white"
                     placeholder="Search for mutual followers..."
                   />
                   {searchQuery && (
@@ -156,7 +156,7 @@ export default function NewConversationModal({
                 <div className="max-h-60 overflow-y-auto">
                   {isLoading ? (
                     <div className="flex justify-center py-4">
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#A4A2FF]"></div>
                     </div>
                   ) : users.length === 0 && searchQuery ? (
                     <p className="text-center text-gray-500 dark:text-gray-400 py-4">
@@ -168,7 +168,7 @@ export default function NewConversationModal({
                         <li key={user.id} className="py-2">
                           <button
                             onClick={() => startConversation(user.id)}
-                            className="w-full flex items-center p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+                            className="w-full flex items-center p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
                           >
                             <div className="relative h-10 w-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
                               {user.image ? (
@@ -179,7 +179,7 @@ export default function NewConversationModal({
                                   className="object-cover"
                                 />
                               ) : (
-                                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg">
+                                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#A4A2FF] to-[#A4A2FF]/80 text-white font-bold text-lg">
                                   {user.name?.charAt(0) || "U"}
                                 </div>
                               )}
@@ -197,7 +197,7 @@ export default function NewConversationModal({
                 <div className="mt-4 flex justify-end">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-gray-200 dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-gray-200 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A4A2FF] focus-visible:ring-offset-2"
                     onClick={onClose}
                   >
                     Cancel

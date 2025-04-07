@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import CreatePostForm from "@/app/components/post/CreatePostForm";
 
 export const metadata: Metadata = {
-  title: "Create Post | SocialApp",
+  title: "Create Post | ClimbTime",
   description: "Share your thoughts and photos with your friends",
 };
 

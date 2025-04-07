@@ -6,7 +6,7 @@ import SuggestedUsers from "@/app/components/user/SuggestedUsers";
 import ExploreClient from "./explore-client";
 
 export const metadata: Metadata = {
-  title: "Explore | SocialApp",
+  title: "Explore | ClimbTime",
   description: "Discover new content and users",
 };
 

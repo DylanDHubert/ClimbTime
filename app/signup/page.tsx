@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import SignupForm from "@/app/components/auth/SignupForm";
 
 export const metadata: Metadata = {
-  title: "Sign Up | SocialApp",
-  description: "Create a new SocialApp account",
+  title: "Sign Up | ClimbTime",
+  description: "Create a new ClimbTime account",
 };
 
 export default async function SignupPage() {

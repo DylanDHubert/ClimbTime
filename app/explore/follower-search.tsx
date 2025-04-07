@@ -173,7 +173,7 @@ export default function FollowerSearch({ onSearchResults, onClearSearch }: Follo
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => searchQuery.trim() && setShowResults(true)}
           placeholder="Search posts and users..."
-          className="block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="block w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#A4A2FF] focus:border-[#A4A2FF]"
         />
         
         {searchQuery && (
@@ -202,7 +202,7 @@ export default function FollowerSearch({ onSearchResults, onClearSearch }: Follo
                 <div className="p-2 border-b border-gray-200 dark:border-gray-700">
                   <button
                     onClick={handlePostsClick}
-                    className="w-full text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                    className="w-full text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
                   >
                     <p className="font-medium text-gray-900 dark:text-white">
                       {searchResults.posts.length} posts matching "{debouncedQuery}"
@@ -225,7 +225,7 @@ export default function FollowerSearch({ onSearchResults, onClearSearch }: Follo
                         <div className="flex items-center justify-between">
                           <Link 
                             href={`/profile/${user.id}`}
-                            className="flex items-center hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-md w-full"
+                            className="flex items-center hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-md w-full"
                           >
                             <div className="relative h-10 w-10 rounded-full overflow-hidden mr-3">
                               {user.image ? (
@@ -236,7 +236,7 @@ export default function FollowerSearch({ onSearchResults, onClearSearch }: Follo
                                   className="object-cover"
                                 />
                               ) : (
-                                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg">
+                                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#A4A2FF] to-[#A4A2FF]/80 text-white font-bold text-lg">
                                   {user.name?.charAt(0) || "U"}
                                 </div>
                               )}
@@ -249,7 +249,7 @@ export default function FollowerSearch({ onSearchResults, onClearSearch }: Follo
                           </Link>
                           <button
                             onClick={() => handleUserClick(user.id)}
-                            className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded ml-2"
+                            className="text-xs bg-[#FDFFA2] hover:bg-[#FDFFA2]/80 text-black px-2 py-1 rounded ml-2 shadow-sm"
                           >
                             View Posts
                           </button>
