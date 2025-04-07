@@ -478,12 +478,20 @@ export default function GradePage() {
             <div>
               <h3 className="text-lg font-medium text-[#A4A2FF]">Route Zero</h3>
             </div>
-            <button
-              onClick={handleSaveRoute}
-              className="bg-[#FDFFA2] text-black px-4 py-2 rounded-full hover:bg-[#FDFFA2]/80 transition-colors"
-            >
-              Save Route
-            </button>
+            <div className="flex space-x-4">
+              <button
+                onClick={handleSaveRoute}
+                className="bg-[#FDFFA2] text-black px-4 py-2 rounded-full hover:bg-[#FDFFA2]/80 transition-colors"
+              >
+                Save Route
+              </button>
+              <button
+                onClick={() => {/* Add grading functionality here */}}
+                className="bg-[#FDFFA2] text-black px-4 py-2 rounded-full hover:bg-[#FDFFA2]/80 transition-colors"
+              >
+                Grade
+              </button>
+            </div>
           </div>
         </div>
       )}
