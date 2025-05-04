@@ -1,4 +1,4 @@
-# NAMETBD - Climbing Social Media Platform
+# ReachOut - Climbing Social Media Platform
 
 Built with Next.js, React, Tailwind CSS, and Prisma.
 
