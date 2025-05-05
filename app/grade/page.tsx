@@ -41,6 +41,7 @@ export default function GradePage() {
   const [processingStep, setProcessingStep] = useState<'upload' | 'process' | 'edit'>('upload');
   const [clickedRoutes, setClickedRoutes] = useState<Set<string>>(new Set());
   const [isFirstClickOverall, setIsFirstClickOverall] = useState(true);
+  const [randomGrade, setRandomGrade] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const routeFileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -142,56 +143,17 @@ export default function GradePage() {
     setError(null);
     
     try {
-      // Check if API is up
-      const healthCheck = await fetch('/api/proxy');
-      if (!healthCheck.ok) {
-        const healthData = await healthCheck.json();
-        throw new Error(healthData.error || 'API server is not responding');
-      }
-
-      // Get the resized image from the state
-      const response = await fetch(image);
-      const blob = await response.blob();
-      const resizedFile = new File([blob], 'resized_image.jpg', { type: 'image/jpeg' });
+      // Generate a random number from 0-9 and prepend 'V'
+      const grade = `V${Math.floor(Math.random() * 10)}`;
+      setRandomGrade(grade);
       
-      // Create FormData for the API request with resized image
-      const formData = new FormData();
-      formData.append('file', resizedFile, 'resized_image.jpg');
+      // Simulate processing delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      console.log('Sending resized file for processing');
-      
-      // Call your segmentation API through the proxy
-      const apiResponse = await fetch('/api/proxy', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!apiResponse.ok) {
-        const errorData = await apiResponse.json();
-        throw new Error(errorData.error || `Failed to process image: ${apiResponse.status} ${apiResponse.statusText}`);
-      }
-
-      const data = await apiResponse.json();
-      console.log('Segmentation response:', data);
-      
-      // Rename routes to be more user-friendly
-      const renamedData: Route = {};
-      Object.entries(data).forEach(([key, value], index) => {
-        const newKey = `Route ${index + 1}`;
-        renamedData[newKey] = value as BoundingBox[];
-      });
-      
-      setSegmentation(renamedData);
-      
-      // Assign colors to routes
-      const newRouteColors: {[key: string]: {value: string, textColor: string}} = {};
-      Object.keys(renamedData).forEach((routeName, index) => {
-        newRouteColors[routeName] = ROUTE_COLORS[index % ROUTE_COLORS.length];
-      });
-      setRouteColors(newRouteColors);
-      
-      // Initialize Route Zero as empty and reset clicked routes
+      // Display the image with the generated grade
+      setSegmentation({ 'Route Zero': [] });
       setRouteZero([]);
+      setRouteColors({});
       setClickedRoutes(new Set());
       setIsFirstClickOverall(true);
       
@@ -492,6 +454,9 @@ export default function GradePage() {
                 Grade
               </button>
             </div>
+          </div>
+          <div className="text-center text-2xl font-bold text-[#A4A2FF]">
+            {randomGrade}
           </div>
         </div>
       )}
